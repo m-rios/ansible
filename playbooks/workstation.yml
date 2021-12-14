@@ -1,5 +1,14 @@
 ---
-- hosts: localhost
+- name: Setup Workstation
+  hosts: localhost
+  vars_prompt:
+    - name: install_docker
+      prompt: 'Install docker (y/n)?'
+      default: 'y'
+  vars_files: ../vars.yml
   roles:
     - role: geerlingguy.docker
       become: yes
+      when: install_docker == 'y'
+    - role: yadm
+      become: no

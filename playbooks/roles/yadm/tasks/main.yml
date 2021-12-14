@@ -1,0 +1,9 @@
+- name: Install yadm for MacOS
+  community.general.homebrew:
+    name: yadm
+    state: present
+    update_homebrew: yes
+  when: ansible_distribution == 'MacOSX'
+- name: Checkout yadm repo
+  command: yadm clone {{ dotfiles_clone_url }}
+
